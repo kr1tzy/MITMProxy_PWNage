@@ -3,46 +3,48 @@ from mitmproxy import http
 import sys
 import re
 
+"""
+- Run mitmdump -s injector.py [URL] [MODE] [SEARCH] [REGEX] [REPLACEMENT]
 
-#   To use
-#   -----
-#
-#   * Enter the virtual env from the mitmproxy home directory
-#
-#       -> . venv/bin/activate
-#
-#   * Run mitm[dump|web|proxy] \
-#         > -s addon.py <URL> <MODE> <SEARCH> <REGEX> <REPLACEMENT>
-#
-#       -> <URL>
-#           -> can be a FQDN or something as simple as "example" or "/stuff"
-#           -> if left empty it will accept any domain
-#           -> sys.argv[3]
-#
-#       -> <MODE> HTML || XML
-#           -> sys.argv[4]
-#
-#       -> <SEARCH> TAGS || ANY
-#           -> TAGS finds and replaces text in specific tags
-#           -> ANY finds and replaces anything in the response
-#               -> Literally ANYTHING!
-#           -> sys.argv[5]
-#
-#       -> <REGEX>
-#           -> TAGS: the regex HAS to be for HTML or XML tags
-#               -> ex) "h1"  or "h1|p" or "h1|p|title"
-#           -> For ANY the regex is for literally anything
-#               -> ex) "dummy text" || "Example|domain"
-#           -> sys.argv[6]
-#
-#       -> <REPLACEMENT> whatever you want to replace the content with
-#           -> sys.argv[7]
-#
-#   Working Examples:
-#
-#   mitmdump -s addon.py "example" "HTML" "ANY" "Example|example" "Meatball"
-#   mitmdump -s addon.py "example" "HTML" "TAGS" "h1|p" "Bacon is good"
-#
+  - [URL]
+
+    - can be a FQDN or something as simple as "example" or "/stuff"
+    - if left empty it will accept any domain
+    - sys.argv[3]
+
+  - [MODE]
+
+    - Must be HTML or XML
+    - sys.argv[4]
+
+  - [SEARCH]
+
+    - Must be TAGS or ANY
+    - TAGS finds and replaces text in specific tags
+    - ANY finds and replaces anything in the response
+    - Literally ANYTHING!
+    - sys.argv[5]
+
+  - [REGEX]
+
+    - For TAGS: the regex HAS to be for HTML or XML tags
+      - ex) "h1" or "h1|p" or "h1|p|title"
+    - For ANY the regex is for literally anything
+      - ex) "dummy text" || "dummy|text"
+    - sys.argv[6]
+
+  - [REPLACEMENT]
+    - whatever you want to replace the content with
+      - ex) "Str8 Pwn3d"
+    - sys.argv[7]
+
+### Some Working Examples:
+
+- mitmdump -s injector.py "example" "HTML" "ANY" "Example|example" "Meatball"
+- mitmdump -s injector.py "example" "HTML" "TAGS" "h1|p" "Bacon is good"
+"""
+
+
 class Injector:
 
     # Checks # of arguments and yells at you if not correct
