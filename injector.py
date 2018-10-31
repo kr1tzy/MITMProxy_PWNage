@@ -7,7 +7,7 @@ class Injector:
 
     # Checks # of arguments and yells at you if not correct
     def load(self, loader):
-        if len(sys.argv) == 8:
+        if len(sys.argv) == 7:
             print("\n---> Addon loaded!\n")
         else:
             print("\n---> Wrong number of args for addon.")
