@@ -23,8 +23,9 @@ class Injector:
 
             # Checks the URL
             if sys.argv[3] in flow.request.pretty_host:
+                soup = BeautifulSoup(flow.response.content, "html.parser")
 
-                # Checks the SEARCH
+               # Checks the SEARCH
                 if sys.argv[4] == "TAGS":
                     # Checks content
                     if soup is not None:
