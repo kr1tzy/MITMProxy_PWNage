@@ -27,25 +27,20 @@
 ### Running
 
 - . venv/bin/activate
-- mitmdump -s examples/addons/injector.py "google.com" "HTML" "TAGS" "h1|p" "Str8 Pwn3d"
+- mitmdump -s examples/addons/injector.py "google.com" "TAGS" "h1|p" "Str8 Pwn3d"
 - Go to google.com and wallah, Str8 Pwn3d!
 
 ---
 
 ## Custom Injection
 
-- Run mitmdump -s injector.py [URL][mode] [SEARCH][regex] [REPLACEMENT]
+- Run mitmdump -s injector.py [URL] [SEARCH] [regex] [REPLACEMENT]
 
   - [URL]
 
     - can be a FQDN or something as simple as "example" or "/stuff"
     - if left empty it will accept any domain
-    - sys.argv[3]
-
-  - [MODE]
-
-    - Must be HTML or XML
-    - sys.argv[4]
+    - sys.argv[2]
 
   - [SEARCH]
 
@@ -53,7 +48,7 @@
     - TAGS finds and replaces text in specific tags
     - ANY finds and replaces anything in the response
     - Literally ANYTHING!
-    - sys.argv[5]
+    - sys.argv[4]
 
   - [REGEX]
 
@@ -61,14 +56,14 @@
       - ex) "h1" or "h1|p" or "h1|p|title"
     - For ANY the regex is for literally anything
       - ex) "dummy text" || "dummy|text"
-    - sys.argv[6]
+    - sys.argv[5]
 
   - [REPLACEMENT]
     - whatever you want to replace the content with
       - ex) "Str8 Pwn3d"
-    - sys.argv[7]
+    - sys.argv[6]
 
 ### Some Working Examples:
 
-- mitmdump -s injector.py "example" "HTML" "ANY" "Example|example" "Meatball"
-- mitmdump -s injector.py "example" "HTML" "TAGS" "h1|p" "Bacon is good"
+- mitmdump -s injector.py "example" "ANY" "Example|example" "Meatball"
+- mitmdump -s injector.py "example" "TAGS" "h1|p" "Bacon is good"
