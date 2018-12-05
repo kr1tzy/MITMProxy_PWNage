@@ -1,5 +1,7 @@
 # MITMProxy_PWNage
 
+![MITMProxy_PWNage_gif](references/MITMProxy_PWNage.gif)
+
 ## About
 - MITMProxy_PWNage is a final project for the Network Security (CSE 5473) class at The Ohio State University. It demonstrates the power and flexiblity of MITMProxy by exhibiting our _injector.py_ plugin alongside an ARP poisoning attack via Ettercap. The _injector.py_ plugin dynamically finds and replaces text in a web response by parsing the HTML tags or following a regular expression. It can be utilized for both HTTP & HTTPS traffic. 
 - Below we indicate two ways to play with the project: **The Fun Way** and **The Conservative Way** 
