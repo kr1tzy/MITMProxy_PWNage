@@ -4,6 +4,8 @@
 - MITMProxy_PWNage is a final project for the Network Security (CSE 5473) class at The Ohio State University. It demonstrates the power and flexiblity of MITMProxy by exhibiting our _injector.py_ plugin alongside an ARP poisoning attack via Ettercap. The _injector.py_ plugin dynamically finds and replaces text in a web response by parsing the HTML tags or following a regular expression. It can be utilized for both HTTP & HTTPS traffic. 
 - Below we indicate two ways to play with the project: **The Fun Way** and **The Conservative Way** 
 	-	**The Fun Way** is intended to be set up in a controlled virtualized network that will not touch a public domain. Furthermore, **The Conservative Way** is contained within a single virtual machine that will not touch a public domain. It can be used for testing, development, etc. 
+- In order to avoid getting the security exception, one can run the **install.sh** script in the Victim VM (or locally) to install the MITMProxy cert. If this is not a previously accepted certificate the exception will come up each time prompting the user to avoid going to the site.
+	- *Note:* in order to run the **./install.sh** script on the Victim VM successfully the IP address should be changed inside the script to the Attack VM's.
 - We assume users will exercise caution, descretion, common sense, and judgement while using these tools and do not take responsibility for their actions.
 
 1. **The Fun Way** for messing with friends, PWNing, etc.
@@ -18,7 +20,7 @@
 - Setting up Ettercap
 - MITMProxy + Plugin
 - IP Forwarding
-- Run the plugin
+- Running the plugin
 
 ### Virtual Network Setup
 -	Inside of whatever virtualization software you use set up a shared NAT network. As an example, with VirtualBox go to VirtualBox->Preferences->Network and add an NAT Network. The network CIDR can be whatever you want, but for our demonstration we will use 10.0.2.0/24. Give it a name (e.g., NATNetw0rk), and check "Enable Network".
@@ -109,22 +111,9 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
 
 ## The Conservative Way
 
+- Set up Firefox to proxy MITMProxy
 - Set up MITMProxy + Plugin
-- Set up Firefox to proxy our MITMProxy instance
 - Run the plugin
-
-### MITMProxy + _injector.py_ Plugin
-
-- git clone https://github.com/kr1tzb1tz/mitmproxy.git
-- git clone https://github.com/kr1tzb1tz/MITMProxy_PWNage.git
-- Substitute ~/Playground/ with your specific path
-- ln -s ~/Playground/MITMProxy_PWNage/injector.py ~/Playground/mitmproxy/examples/addons/
-- sudo apt-get install -y build-essential libbz2-dev libssl-dev libreadline-dev libsqlite3-dev tk-dev curl python3-venv
-- cd ~/Playground/ && curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
-- echo eval "$(pyenv init -)" >> ~/.bashrc && exec $SHELL
-- pyenv install 3.6.0 && pyenv global 3.6.0
-- cd ~/Playground/mitmproxy/ && sudo ./dev.sh
-- _Note_: on some systems you may need to install other python modules, just follow along with any error messages and download what it yells at you about.
 
 ### Setting up Firefox
 
@@ -141,6 +130,19 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
 - This installs the MITMProxy certificate and an adequate firefox profile with proxying to port 8080.
 - Run the plugin
 
+### MITMProxy + _injector.py_ Plugin
+
+- git clone https://github.com/kr1tzb1tz/mitmproxy.git
+- git clone https://github.com/kr1tzb1tz/MITMProxy_PWNage.git
+- Substitute ~/Playground/ with your specific path
+- ln -s ~/Playground/MITMProxy_PWNage/injector.py ~/Playground/mitmproxy/examples/addons/
+- sudo apt-get install -y build-essential libbz2-dev libssl-dev libreadline-dev libsqlite3-dev tk-dev curl python3-venv
+- cd ~/Playground/ && curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+- echo eval "$(pyenv init -)" >> ~/.bashrc && exec $SHELL
+- pyenv install 3.6.0 && pyenv global 3.6.0
+- cd ~/Playground/mitmproxy/ && sudo ./dev.sh
+- _Note_: on some systems you may need to install other python modules, just follow along with any error messages and download what it yells at you about.
+
 ### Running
 
 - . venv/bin/activate
@@ -148,7 +150,6 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
 	- Edit the parameters to get the desired functionality
 - Then run, mitmdump --mode transparent --showhost -s examples/addons/injector.py
 - Go to https://example.com and wallah, Pwn3d!
-
 
 ## Injector.py
 
@@ -170,7 +171,7 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
       - ex) "h1" or "h1|p" or "h1|p|title"
     - For ANY the regex is for literally anything
       - ex) "dummy text" || "dummy|text"
-  - [REPLACEMENT]
+  - [INJECT]
     - whatever you want to replace the content with
       - ex) "Str8 Pwn3d"
 

@@ -2,11 +2,10 @@ from bs4 import BeautifulSoup
 from mitmproxy import http
 import re
 
-URL         =   "google"
-SEARCH      =   "ANY"
-REGEX       =   "Lucky"
-INJECT      =   "Hack3d"
-
+URL         =   "example.com"
+SEARCH      =   "TAGS"
+REGEX       =   "h1"
+INJECT      =   "Hack3d 4 Dr. Lin"
 
 class Injector:
 
