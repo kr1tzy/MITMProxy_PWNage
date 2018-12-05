@@ -160,16 +160,17 @@ Edit the params inside of the script to get desired result
 	- if left empty it will accept any domain
 2. **SEARCH**
 	- Must be **TAGS** or **ANY**
-	- **TAGS** finds and replaces text in specific tags
-	- **ANY** finds and replaces anything in the response
+	- **TAGS** finds and replaces text in specified HTML tags
+	- **ANY** finds and replaces any text in the response that matches the regex
 3. **REGEX**
-	- For **TAGS** the regex HAS to be for HTML or XML tags
+	- For **TAGS** the regex **has to be for HTML tags**
 		- ex) "h1" or "h1|p" or "h1|p|title"
-	- For **ANY** the regex is for literally anything
-		- ex) "dummy text" || "dummy|text"
+	- For **ANY** the regex can be for *literally anything* that regex can handle
+		- ex) "Bacon" or "(\w+@\w+)|Search" or "^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$
+"
 4. **INJECT**
-	- whatever you want to replace the content with
-		- ex) "Str8 Pwn3d"
+	- whatever you want to replace the found text with
+		- ex) "Str8 Pwn3d" or "Neato Burrito"
 
 - Then run, 	
 
