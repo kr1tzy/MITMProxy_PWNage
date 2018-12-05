@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script installs a certificate, generates a new firefox profile, and updates the proxy settings to proxy to port 8080. Meant to be ran on a target's machine.
+
 # generate cert
 export http_proxy='127.0.0.1:8080'
 wget mitm.it/cert/pem
