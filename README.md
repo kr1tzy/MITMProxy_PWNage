@@ -154,24 +154,18 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
 ## Injector.py
 
 - Edit the params inside of the script to get desired result 
-	1. URL 
-	2. SEARCH 
-	3. REGEX 
-	4. INJECT
-
-  - [URL]
+  1. **URL**
     - a FQDN or something as simple as "example" or "/stuff"
     - if left empty it will accept any domain
-  - [SEARCH]
-    - Must be **TAGS** or **ANY**
+  2. **SEARCH**
     - **TAGS** finds and replaces text in specific tags
     - ANY finds and replaces anything in the response
-  - [REGEX]
-    - For TAGS: the regex HAS to be for HTML or XML tags
+  3. **REGEX**
+  	- For TAGS: the regex HAS to be for HTML or XML tags
       - ex) "h1" or "h1|p" or "h1|p|title"
     - For ANY the regex is for literally anything
       - ex) "dummy text" || "dummy|text"
-  - [INJECT]
+  4. **INJECT**
     - whatever you want to replace the content with
       - ex) "Str8 Pwn3d"
 
