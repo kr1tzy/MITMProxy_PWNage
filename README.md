@@ -144,46 +144,55 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
 
 - . venv/bin/activate
 - View the _injector.py_ instructions below or view the source code to understand what you can do but the following example works.
-- mitmdump -s examples/addons/injector.py "example.com" "TAGS" "h1|p" "Str8 Pwn3d!"
+- mitmdump --mode transparent --showhost -s examples/addons/injector.py
 - Go to https://example.com and wallah, Str8 Pwn3d!
 
 
 ## Injector.py
 
-- Run mitmdump -s injector.py [URL] [SEARCH] [regex] [REPLACEMENT]
+- Edit the params inside of the script to get desired result 
+	1. URL 
+	2. SEARCH 
+	3. REGEX 
+	4. INJECT
+
+- Then run, 	
+
+	```
+	mitmdump --mode transparent --showhost -s examples/addons/injector.py 
+	```
 
   - [URL]
-
-    - can be a FQDN or something as simple as "example" or "/stuff"
+    - a FQDN or something as simple as "example" or "/stuff"
     - if left empty it will accept any domain
-    - sys.argv[2]
-
   - [SEARCH]
-
-    - Must be TAGS or ANY
-    - TAGS finds and replaces text in specific tags
+    - Must be **TAGS** or **ANY**
+    - **TAGS** finds and replaces text in specific tags
     - ANY finds and replaces anything in the response
-    - Literally ANYTHING!
-    - sys.argv[4]
-
   - [REGEX]
-
     - For TAGS: the regex HAS to be for HTML or XML tags
       - ex) "h1" or "h1|p" or "h1|p|title"
     - For ANY the regex is for literally anything
       - ex) "dummy text" || "dummy|text"
-    - sys.argv[5]
-
   - [REPLACEMENT]
     - whatever you want to replace the content with
       - ex) "Str8 Pwn3d"
-    - sys.argv[6]
 
 ### Working Examples:
 
-- mitmdump -s injector.py "example.com" "ANY" "Example" "Meatball"
-- mitmdump -s injector.py "example.com" "TAGS" "h1|p" "Bacon is lyfe"
+```
+URL         =   "example"
+SEARCH      =   "TAGS"
+REGEX       =   "h1|p"
+INJECT      =   "Str8 hack3d"
+```
 
+```
+URL         =   "google"
+SEARCH      =   "ANY"
+REGEX       =   "Lucky|Google"
+INJECT      =   "Hack3d"
+```
 
 --- 
 
