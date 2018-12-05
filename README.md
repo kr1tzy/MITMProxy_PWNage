@@ -2,7 +2,8 @@
 
 ## About
 - MITMProxy_PWNage is a final project for the Network Security (CSE 5473) class at The Ohio State University. It demonstrates the power and flexiblity of MITMProxy by exhibiting our _injector.py_ plugin alongside an ARP poisoning attack via Ettercap. The _injector.py_ plugin dynamically finds and replaces text in a web response by parsing the HTML tags or following a regular expression. It can be utilized for both HTTP & HTTPS traffic. 
-- Below we indicate two ways to play with the project: **The Fun Way** and **The Conservative Way**. **The Fun Way** is intended to be set up in a controlled virtualized network that will not touch a public domain. Furthermore, **The Conservative Way** is contained within a single virtual machine that will not touch a public domain. It can be used for testing, development, etc. 
+- Below we indicate two ways to play with the project: **The Fun Way** and **The Conservative Way** 
+	-	**The Fun Way** is intended to be set up in a controlled virtualized network that will not touch a public domain. Furthermore, **The Conservative Way** is contained within a single virtual machine that will not touch a public domain. It can be used for testing, development, etc. 
 - We assume users will exercise caution, descretion, common sense, and judgement while using these tools and do not take responsibility for their actions.
 
 1. **The Fun Way** for messing with friends, PWNing, etc.
