@@ -159,12 +159,13 @@ Edit the params inside of the script to get desired result
 	- a FQDN or something as simple as "example" or "/stuff"
 	- if left empty it will accept any domain
 2. **SEARCH**
+	- Must be **TAGS** or **ANY**
 	- **TAGS** finds and replaces text in specific tags
-	- ANY finds and replaces anything in the response
+	- **ANY** finds and replaces anything in the response
 3. **REGEX**
-	- For TAGS: the regex HAS to be for HTML or XML tags
+	- For **TAGS** the regex HAS to be for HTML or XML tags
 		- ex) "h1" or "h1|p" or "h1|p|title"
-	- For ANY the regex is for literally anything
+	- For **ANY** the regex is for literally anything
 		- ex) "dummy text" || "dummy|text"
 4. **INJECT**
 	- whatever you want to replace the content with
