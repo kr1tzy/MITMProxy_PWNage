@@ -103,8 +103,9 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
 
 - . venv/bin/activate
 - View the _injector.py_ instructions below or view the source code to understand what you can do but the following example works.
-	- mitmdump -s examples/addons/injector.py "example.com" "TAGS" "h1|p" "Str8 Pwn3d!"
-- Go to https://example.com in the Victim VM & wallah, Str8 Pwn3d!
+	- Edit the parameters to get the desired functionality
+- Then run, mitmdump --mode transparent --showhost -s examples/addons/injector.py
+- Go to https://example.com and wallah, Pwn3d!
 
 ## The Conservative Way
 
@@ -144,8 +145,9 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
 
 - . venv/bin/activate
 - View the _injector.py_ instructions below or view the source code to understand what you can do but the following example works.
-- mitmdump --mode transparent --showhost -s examples/addons/injector.py
-- Go to https://example.com and wallah, Str8 Pwn3d!
+	- Edit the parameters to get the desired functionality
+- Then run, mitmdump --mode transparent --showhost -s examples/addons/injector.py
+- Go to https://example.com and wallah, Pwn3d!
 
 
 ## Injector.py
@@ -155,12 +157,6 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
 	2. SEARCH 
 	3. REGEX 
 	4. INJECT
-
-- Then run, 	
-
-	```
-	mitmdump --mode transparent --showhost -s examples/addons/injector.py 
-	```
 
   - [URL]
     - a FQDN or something as simple as "example" or "/stuff"
@@ -177,6 +173,12 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
   - [REPLACEMENT]
     - whatever you want to replace the content with
       - ex) "Str8 Pwn3d"
+
+- Then run, 	
+
+	```
+	mitmdump --mode transparent --showhost -s examples/addons/injector.py 
+	```
 
 ### Working Examples:
 
