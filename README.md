@@ -2,16 +2,18 @@
 
 ## About
 - MITMProxy_PWNage is a final project for the Network Security (CSE 5473) class at The Ohio State University. It demonstrates the power and flexiblity of MITMProxy by exhibiting our _injector.py_ plugin alongside an ARP poisoning attack via Ettercap. The _injector.py_ plugin dynamically finds and replaces text in a web response by parsing the HTML tags or following a regular expression. It can be utilized for both HTTP & HTTPS traffic. 
-- Below we indicate two ways to play with the project: **the fun way** and **the conservative way**. **The fun way** is intended to be set up in a controlled virtualized network that will not touch a public domain. Furthermore, **the conservative way** is contained within a single virtual machine that will not touch a public domain. It can be used for testing, development, etc. 
+- Below we indicate two ways to play with the project: **The Fun Way** and **The Conservative Way**. **The Fun Way** is intended to be set up in a controlled virtualized network that will not touch a public domain. Furthermore, **The Conservative Way** is contained within a single virtual machine that will not touch a public domain. It can be used for testing, development, etc. 
 - We assume users will exercise caution, descretion, common sense, and judgement while using these tools and do not take responsibility for their actions.
 
-1. **The fun way** for messing with friends, PWNing, etc.
+1. **The Fun Way** for messing with friends, PWNing, etc.
 	- Involves ARP poisoning and running MITMProxy to view and manipulate your targets' HTTP & HTTPS traffic.
 
-2. **The conservative way** for development, testing, etc.
+2. **The Conservative Way** for development, testing, etc.
 	- Involves running MITMProxy locally with Firefox proxy settings manually set in Firefox. Tested on Ubuntu 18.04.
 
-### The Fun Way
+--- 
+
+## The Fun Way
 
 - Virtual Network Setup
 - Setting up Ettercap
@@ -19,7 +21,7 @@
 - IP Forwarding
 - Run the plugin
 
-#### Virtual Network Setup
+### Virtual Network Setup
 -	Inside of whatever virtualization software you use set up a shared NAT network. As an example, with VirtualBox go to VirtualBox->Preferences->Network and add an NAT Network. The network CIDR can be whatever you want, but for our demonstration we will use 10.0.2.0/24. Give it a name (e.g., NATNetw0rk), and check "Enable Network".
 - Create two virtual machines, we used Ubuntu 18.04 for our "Attack" machine and Lubuntu 14.04 for our "Victim" machine. You can use whatever flavor of Linux you want but be mindful about setup differences. From here on out these machines will be denoted "Attack VM" and "Victim VM", respectively.
 - Configure the network settings of each VM in VirtualBox, make sure their network cards are using the NAT network you created, in our case NATNetw0rk.
@@ -59,7 +61,7 @@ sudo systemctl restart networking.service
 
 - Make sure you can ping each other. For example, from the Attack VM ping 10.0.2.5, and from the Victim VM ping 10.0.2.3. You should be getting responses from both machines. Now we can set up Ettercap on the Attack VM.
 
-#### Ettercap Setup (on Attack VM)
+### Ettercap Setup (on Attack VM)
 
 - sudo sysctl -w net.ipv4.ip_forward=1
 - sudo apt-get install ettercap-graphical
@@ -73,7 +75,7 @@ sudo systemctl restart networking.service
 	-	Check the "Sniff remote connections." box and click "Ok"
 - To verify we're getting traffic open a terminal and run sudo tcpdump. In the Victim VM open Firefox and go to google.com and come back to the tcpdump terminal screen and watch the traffic flow. Facebook won't populate on the Victim VM because we're not forwarding anything yet; however, we proved we're getting the traffic from the Victim VM so we can do IP forwarding and setup MITMProxy.
 
-#### IP Forwarding
+### IP Forwarding
 
 - Run the following in the Attack VM
 	- Make sure you have the right interface
@@ -85,7 +87,7 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
 
 - To confirm run sudo iptables -t nat -L
 
-#### MITMProxy + _injector.py_ Plugin
+### MITMProxy + _injector.py_ Plugin
 
 - git clone https://github.com/kr1tzb1tz/mitmproxy.git
 - git clone https://github.com/kr1tzb1tz/MITMProxy_PWNage.git
@@ -98,20 +100,20 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
 - cd ~/Playground/mitmproxy/ && sudo ./dev.sh
 - _Note_: on some systems you may need to install other python modules, just follow along with any error messages and download what it yells at you about.
 
-#### Running
+### Running
 
 - . venv/bin/activate
 - View the _injector.py_ instructions below or view the source code to understand what you can do but the following example works.
 	- mitmdump -s examples/addons/injector.py "example.com" "TAGS" "h1|p" "Str8 Pwn3d!"
 - Go to https://example.com in the Victim VM & wallah, Str8 Pwn3d!
 
-### The Conservative Way
+## The Conservative Way
 
 - Set up MITMProxy + Plugin
 - Set up Firefox to proxy our MITMProxy instance
 - Run the plugin
 
-#### MITMProxy + _injector.py_ Plugin
+### MITMProxy + _injector.py_ Plugin
 
 - git clone https://github.com/kr1tzb1tz/mitmproxy.git
 - git clone https://github.com/kr1tzb1tz/MITMProxy_PWNage.git
@@ -124,9 +126,9 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
 - cd ~/Playground/mitmproxy/ && sudo ./dev.sh
 - _Note_: on some systems you may need to install other python modules, just follow along with any error messages and download what it yells at you about.
 
-#### Setting up Firefox
+### Setting up Firefox
 
-##### Method 1 - Manual setup
+#### Method 1 - Manual setup
 
 - Open preferences of Firefox and search for proxy
   - Manually configure the proxy to localhost port 8080 for HTTP and HTTPS and press OK
@@ -134,12 +136,12 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
   - Check both boxes and accept
 - Run the plugin
 
-##### Method 2 - Run the install.sh script
+#### Method 2 - Run the install.sh script
 - cd firefox && ./install.sh
 - This installs the MITMProxy certificate and an adequate firefox profile with proxying to port 8080.
 - Run the plugin
 
-#### Running
+### Running
 
 - . venv/bin/activate
 - View the _injector.py_ instructions below or view the source code to understand what you can do but the following example works.
