@@ -11,8 +11,6 @@
 2. **The Conservative Way** for development, testing, etc.
 	- Involves running MITMProxy locally with Firefox proxy settings manually set in Firefox. Tested on Ubuntu 18.04.
 
---- 
-
 ## The Fun Way
 
 - Virtual Network Setup
@@ -148,7 +146,6 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
 - mitmdump -s examples/addons/injector.py "example.com" "TAGS" "h1|p" "Str8 Pwn3d!"
 - Go to https://example.com and wallah, Str8 Pwn3d!
 
----
 
 ## Injector.py
 
@@ -186,7 +183,9 @@ sudo iptables -t nat -A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to
 - mitmdump -s injector.py "example.com" "ANY" "Example" "Meatball"
 - mitmdump -s injector.py "example.com" "TAGS" "h1|p" "Bacon is lyfe"
 
+
 --- 
+
 
 ### Our Team
 
